@@ -33,31 +33,10 @@ public:
     }
 private:
     bool check(const std::string& left, const std::string& right) {
-        int i = 0;
-        for (; i < left.size(); ++i)
+        int count = 0;
+        for (int i = 0; i < left.size() && count <= 2; ++i)
             if (left[i] != right[i])
-                break;
-        
-        if (i >= (left.size() - 1))
-            return false;
-        
-        int j = left.size() - 1;
-        for (; j > i; --j)
-            if (left[j] != right[j])
-                break;
-        
-        if (j <= i || left[i] != right[j] || left[j] != right[i])
-            return false;
-
-        string comp = right;
-        comp[j] = left[j];
-        comp[i] = left[i];
-        
-        for (i = 0; i < left.size(); ++i)
-            if (left[i] != comp[i])
-                return false;
-        
-        return true;
+                ++count;
+        return (count == 2);
     }
 };
-
